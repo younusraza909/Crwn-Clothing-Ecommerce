@@ -16,7 +16,7 @@ const config = {
 //Function to get user that is return from authentication library and store it in dabase firestore
 
 //the userAuth passed here is the object that we get back from firebase on google signin
-export const createUserProfileDocument = async (userAuth) => {
+export const createUserProfileDocument = async (userAuth, otherProp) => {
   if (!userAuth) return;
   //will get user ref and will than use get to get snapshot
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -32,6 +32,7 @@ export const createUserProfileDocument = async (userAuth) => {
         displayName,
         email,
         createAt,
+        ...otherProp,
       });
     } catch (error) {
       console.log("Error creating USer", error.message);
