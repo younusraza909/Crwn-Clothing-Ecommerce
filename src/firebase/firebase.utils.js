@@ -13,6 +13,35 @@ const config = {
   measurementId: "G-SLJLKDTDHY",
 };
 
+//Function to get user that is return from authentication library and store it in dabase firestore
+
+//the userAuth passed here is the object that we get back from firebase on google signin
+export const createUserProfileDocument = async (userAuth) => {
+  if (!userAuth) return;
+  //will get user ref and will than use get to get snapshot
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  const snapshot = await userRef.get();
+
+  if (!snapshot.exists) {
+    const { displayName, email } = userAuth;
+    const createAt = new Date();
+
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createAt,
+      });
+    } catch (error) {
+      console.log("Error creating USer", error.message);
+    }
+  }
+
+  return userRef;
+  //this will return userRef for Future Refernece
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
