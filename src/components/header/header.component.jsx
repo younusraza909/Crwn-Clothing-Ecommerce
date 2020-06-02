@@ -35,9 +35,7 @@ const Header = ({ currentUser }) => (
 
 //in order to connect our component with state of root user
 
-const mapStateToProps = (state) => {
-  currentUser: state.user.currentUser;
-};
+const mapStateToProps = (state) => ({ currentUser: state.user.currentUser });
 
 export default connect(mapStateToProps)(Header);
 //connect(mapStateToProps) this return a fucntion in which we have to passed Header
