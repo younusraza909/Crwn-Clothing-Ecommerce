@@ -37,5 +37,7 @@ const Header = ({ currentUser }) => (
 
 const mapStateToProps = (state) => ({ currentUser: state.user.currentUser });
 
+//here state refers to main root reducers
+
 export default connect(mapStateToProps)(Header);
 //connect(mapStateToProps) this return a fucntion in which we have to passed Header
