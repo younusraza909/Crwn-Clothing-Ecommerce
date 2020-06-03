@@ -8,7 +8,11 @@ import { auth } from "../../firebase/firebase.utils";
 import { connect } from "react-redux";
 //its hight order component function
 
-const Header = ({ currentUser }) => (
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropDown from "../cart-dropdown/cart-dropdown.compoent";
+import CartDropdown from "../cart-dropdown/cart-dropdown.compoent";
+
+const Header = ({ currentUser, hidden }) => (
   <div className="header">
     <Link to="/" className="logo-container">
       <Logo className="logo" />
@@ -29,13 +33,18 @@ const Header = ({ currentUser }) => (
           SignIn
         </Link>
       )}
+      <CartIcon />
     </div>
+    {hidden ? null : <CartDropdown />}
   </div>
 );
 
 //in order to connect our component with state of root user
 
-const mapStateToProps = (state) => ({ currentUser: state.user.currentUser });
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser: currentUser,
+  hidden: hidden,
+});
 
 //here state refers to main root reducers
 
