@@ -15,3 +15,19 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
   //in this fucntion if it will run first time this part will run and quantity will attatch to object property
   return [...cartItems, { ...cartItemToAdd, quantity: 1 }];
 };
+
+export const removeItemFromCart = (cartItems, cartItemRemove) => {
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemRemove.id
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter((cartItem) => cartItem.id !== cartItemRemove.id);
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === cartItemRemove.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
