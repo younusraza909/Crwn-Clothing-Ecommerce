@@ -9,8 +9,11 @@ import { connect } from "react-redux";
 //its hight order component function
 
 import CartIcon from "../cart-icon/cart-icon.component";
-import CartDropDown from "../cart-dropdown/cart-dropdown.compoent";
 import CartDropdown from "../cart-dropdown/cart-dropdown.compoent";
+
+import { selectCartHidden } from "../../redux/cart/cart.selectors";
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { createStructuredSelector } from "reselect";
 
 const Header = ({ currentUser, hidden }) => (
   <div className="header">
@@ -41,9 +44,10 @@ const Header = ({ currentUser, hidden }) => (
 
 //in order to connect our component with state of root user
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser: currentUser,
-  hidden: hidden,
+const mapStateToProps = createStructuredSelector({
+  //we can pass state manually in east function or use craete Structured selector which pass high level state directly into each subsequent
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 //here state refers to main root reducers
