@@ -1,11 +1,12 @@
-import styled, { css } from "styled-components";
+import styled /* { css }*/ from "styled-components";
 import { Link } from "react-router-dom";
 
 //because same code is used in both div and Reack.Link so we use css from library to make a block of css and pass variable name in both componenets
-const OptionContainerStyles = css`
-  padding: 10px 15px;
-  cursor: pointer;
-`;
+
+// const OptionContainerStyles = css`
+//   padding: 10px 15px;
+//   cursor: pointer;
+// `;
 
 export const HeaderContainer = styled.div`
   height: 70px;
@@ -31,9 +32,10 @@ export const OptionsContainer = styled.div`
 `;
 
 export const OptionLink = styled(Link)`
-  ${OptionContainerStyles}
+  padding: 10px 15px;
+  cursor: pointer;
 `;
 
-export const OptionDiv = styled(Link)`
-  ${OptionContainerStyles}
-`;
+// export const OptionDiv = styled(Link)`
+//   ${OptionContainerStyles}
+// `;
