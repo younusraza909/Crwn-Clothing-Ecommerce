@@ -1,39 +1,45 @@
 import React from "react";
 import CartItem from "../cart-item/cart-item.component";
 
-import CustomButton from "../customButton/customButton.component";
-
 import { withRouter } from "react-router-dom";
 
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 
 import { connect } from "react-redux";
 
-import "./cart-dropdown.styles.scss";
 import { createStructuredSelector } from "reselect";
 
 import { toggleCartHidden } from "../../redux/cart/cart.action";
 
+//Imports For Styled Components
+import {
+  CartDropDownContainer,
+  CartItemsContainer,
+  EmptyMessageContainer,
+  CartDropDownButton,
+} from "./cart-dropdown.styles";
+
 const CartDropdown = ({ cartItems, history, dispatch }) => (
-  <div className="cart-dropdown">
-    <div className="cart-items">
+  <CartDropDownContainer>
+    <CartItemsContainer>
       {cartItems.length ? (
         cartItems.map((cartItem) => (
           <CartItem key={cartItem.id} item={cartItem} />
         ))
       ) : (
-        <span className="empty-message">Your Cart Is Empty </span>
+        <EmptyMessageContainer>Your Cart Is Empty </EmptyMessageContainer>
       )}
-    </div>
-    <CustomButton
+    </CartItemsContainer>
+    {/* Its Actually Custom Button But We have Used Styled Component in it */}
+    <CartDropDownButton
       onClick={() => {
         history.push("/checkout");
         dispatch(toggleCartHidden());
       }}
     >
       GO TO CHECKOUT
-    </CustomButton>
-  </div>
+    </CartDropDownButton>
+  </CartDropDownContainer>
 );
 
 const mapStateToProps = createStructuredSelector({
