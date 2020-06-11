@@ -7,8 +7,8 @@ import {
   removeItem,
 } from "../../redux/cart/cart.action";
 
-const CheckoutItem = ({ cartItems, clearItem, addItem, removeItem }) => {
-  const { name, quantity, imageUrl, price } = cartItems;
+const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
+  const { name, quantity, imageUrl, price } = cartItem;
 
   return (
     <div className="checkout-item">
@@ -17,16 +17,16 @@ const CheckoutItem = ({ cartItems, clearItem, addItem, removeItem }) => {
       </div>
       <span className="name">{name}</span>
       <span className="quantity">
-        <div className="arrow" onClick={() => removeItem(cartItems)}>
+        <div className="arrow" onClick={() => removeItem(cartItem)}>
           &#10094;
         </div>
         <span className="value">{quantity}</span>
-        <div className="arrow" onClick={() => addItem(cartItems)}>
+        <div className="arrow" onClick={() => addItem(cartItem)}>
           &#10095;
         </div>
       </span>
       <span className="price">{price}</span>
-      <div className="remove-button" onClick={() => clearItem(cartItems)}>
+      <div className="remove-button" onClick={() => clearItem(cartItem)}>
         {/* UTF_8 Dingbats */}
         &#10005;
       </div>
