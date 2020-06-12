@@ -66,6 +66,25 @@ export const createUserProfileDocument = async (userAuth, otherProp) => {
 // };
 //////////////////////////////////////////////////////////////
 
+//Convering Collection into organized form
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  return transformCollection.reduce((acc, collection) => {
+    acc[collection.title.toLowerCase()] = collection;
+    return acc;
+  }, {});
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
