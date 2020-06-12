@@ -43,6 +43,29 @@ export const createUserProfileDocument = async (userAuth, otherProp) => {
   //this will return userRef for Future Refernece
 };
 
+/////////////////////////////////////////////////////////////
+
+// //To Add Shop Data To Firebase
+// export const addCollectionAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd
+// ) => {
+//   const collectionRef = firestore.collection(collectionKey);
+
+//   //bactchRight is a way to batch all code in one place and then execute it if there will be error in halfway all will be terminated
+//   const batch = firestore.batch();
+
+//   objectsToAdd.forEach((obj) => {
+//     //will create a doc refernce with unique id
+//     const newDocRef = collectionRef.doc();
+//     batch.set(newDocRef, obj);
+//   });
+
+//   //will fireoff batch request
+//   return await batch.commit();
+// };
+//////////////////////////////////////////////////////////////
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();

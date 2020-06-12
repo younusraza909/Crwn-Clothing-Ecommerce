@@ -14,6 +14,7 @@ import { selectCurrentUser } from "./redux/user/user.selectors";
 import { connect } from "react-redux";
 import { setCurrentUser } from "./redux/user/user.action";
 import { createStructuredSelector } from "reselect";
+import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -33,6 +34,13 @@ class App extends React.Component {
       }
       //if useAuth is null its else block
       setCurrentUser(userAuth);
+
+      //this was one time function so that we dont have to manullay put colletion through firebase
+      // addCollectionAndDocuments(
+      //   "collections",
+      //   //we dont want any other property in our database
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      // );
     });
   }
 
