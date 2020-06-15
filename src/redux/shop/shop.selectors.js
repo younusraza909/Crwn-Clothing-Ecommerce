@@ -10,11 +10,11 @@ export const shopCollectionData = createSelector(
 //in this selector we are just converting our object returned into an array for out some component
 export const selectCollectionsForPreview = createSelector(
   [shopCollectionData],
-  (collections) => Object.keys(collections).map((key) => collections[key])
+  (collections) =>
+    collections ? Object.keys(collections).map((key) => collections[key]) : []
 );
 
 export const selectCollection = (collectionUrlParam) =>
-  createSelector(
-    [shopCollectionData],
-    (collections) => collections[collectionUrlParam]
+  createSelector([shopCollectionData], (collections) =>
+    collections ? collections[collectionUrlParam] : null
   );
