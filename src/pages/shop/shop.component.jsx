@@ -32,12 +32,29 @@ class ShopPage extends React.Component {
     const CollectionRef = firestore.collection("collections");
 
     //Onsnapshot means whenever refernce updated or this func run for first time firebase will send snapshot of that refernce
-    CollectionRef.onSnapshot(async (snapshot) => {
+
+    // // // Its Live Straem Method Or Observer pattern
+    // CollectionRef.onSnapshot(async (snapshot) => {
+    //   const collectionMap = convertCollectionsSnapshotToMap(snapshot);
+
+    //   updateCollections(collectionMap);
+    //   this.setState({ loading: false });
+    // });
+
+    //Promise Method 1
+    CollectionRef.get().then((snapshot) => {
       const collectionMap = convertCollectionsSnapshotToMap(snapshot);
 
       updateCollections(collectionMap);
       this.setState({ loading: false });
     });
+
+    //Native Fetch APi Method
+    // fetch(
+    //   "https://firestore.googleapis.com/v1/projects/crwn-clothing-db-f2925/databases/(default)/documents/collections"
+    // )
+    //   .then((res) => res.json())
+    //   .then((collections) => console.log(collections));
   }
 
   render() {
@@ -49,7 +66,7 @@ class ShopPage extends React.Component {
           exact
           path={`${match.path}`}
           render={(props) => (
-            <CollectionsOverviewWithSpinner isloading={loading} {...props} />
+            <CollectionsOverviewWithSpinner isLoading={loading} {...props} />
           )}
         />
         <Route
