@@ -5,7 +5,7 @@ import CollectionPage from "../collection/collection.component";
 
 import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
 
-import { selectCollectionFetching } from "../../redux/shop/shop.selectors";
+import { selectCollectionLoaded } from "../../redux/shop/shop.selectors";
 
 import { fetchCollectionStartAsync } from "../../redux/shop/shop.action";
 
@@ -31,7 +31,7 @@ class ShopPage extends React.Component {
   }
 
   render() {
-    const { match, isCollectionFetching } = this.props;
+    const { match, isCollectionFetching, isCollectionLoaded } = this.props;
 
     return (
       <div className="shop-page">
@@ -40,7 +40,7 @@ class ShopPage extends React.Component {
           path={`${match.path}`}
           render={(props) => (
             <CollectionsOverviewWithSpinner
-              isLoading={isCollectionFetching}
+              isLoading={!isCollectionLoaded}
               {...props}
             />
           )}
@@ -49,7 +49,7 @@ class ShopPage extends React.Component {
           path={`${match.path}/:collectionId`}
           render={(props) => (
             <CollectionsPageWithSpinner
-              isLoading={isCollectionFetching}
+              isLoading={!isCollectionLoaded}
               {...props}
             />
           )}
@@ -60,7 +60,7 @@ class ShopPage extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  isCollectionFetching: selectCollectionFetching,
+  isCollectionLoaded: selectCollectionLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
